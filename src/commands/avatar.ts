@@ -28,19 +28,25 @@ async function avatar(msg: Message, args: string) : Promise<void> {
     let username: string = 'User';
     let url: string = '';
 
+    let user: User | undefined;
     if (msg.mentions.users.size > 0) {
-        let user: User | undefined = msg.mentions.users.first();
-        if (user) {
-            username = user.username;
-            url = user.displayAvatarURL();
-        }
-        else {
-            return Promise.reject(ERROR_EMBED.setDescription('❌ Invalid user!'));
-        }
+        user = msg.mentions.users.first();
+    }
+    else if (args.length > 0) {
+        user = msg.client.users.cache.find(user => user.id === args);
+        if (!user)
+            user = msg.client.users.cache.find(user => user.username === args);
     }
     else {
-        username = msg.author.username;
-        url = msg.author.displayAvatarURL();
+        user = msg.author;
+    }
+
+    if (user) {
+        username = user.username;
+        url = user.displayAvatarURL();
+    }
+    else {
+        return Promise.reject(ERROR_EMBED.setDescription('❌ Invalid user!'));
     }
 
     msg.channel.send(
