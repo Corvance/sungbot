@@ -18,6 +18,8 @@ module.exports = {
                 value: '```bash\n'
                 + 's/avatar\n'
                 + 's/avatar @lazerhorse\n'
+                + 's/avatar lazerhorse\n'
+                + 's/avatar 975476375987310682\n'
                 + '```'
             }
         ]
