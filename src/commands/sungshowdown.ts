@@ -22,7 +22,7 @@ module.exports = {
             {
                 name: '**Examples**',
                 value: '```bash\n'
-                    + 's/sungshowdown 2 30sm\n'
+                    + 's/sungshowdown 2 30s\n'
                     + 's/sungshowdown 4 5h\n'
                     + 's/sungshowdown 12 7d\n'
                     + '```'
