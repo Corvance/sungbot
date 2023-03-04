@@ -15,8 +15,24 @@ export const client: Client = new Client(
     }
 );
 
+// Facilitate uptime monitors.
+import { createServer, IncomingMessage, ServerResponse } from 'http';
+const server = createServer((req: IncomingMessage, res: ServerResponse) => {
+    res.writeHead(200);
+    res.end('ok');
+});
+
 client.on('ready', async e => {
-    console.log(`SungBot connected!`);
+    if (client.user && client.user.username.endsWith('-Testing')) {
+        server.listen(3010);
+        console.log(`SungBot-Testing connected!`);
+
+    }
+    else {
+        server.listen(3000);
+        console.log(`SungBot connected!`);
+
+    }
 });
 
 db.initialiser.on('complete', async _ => {
@@ -27,13 +43,7 @@ db.initialiser.on('complete', async _ => {
     });
 });
 
-// Facilitate uptime monitors.
-import { createServer, IncomingMessage, ServerResponse } from 'http';
-const server = createServer((req: IncomingMessage, res: ServerResponse) => {
-    res.writeHead(200);
-    res.end('ok');
-});
-server.listen(3000);
+
 
 // Fill a commands object with commands accessible
 // by key via their command name/prefix.
