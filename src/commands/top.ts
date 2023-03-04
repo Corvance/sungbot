@@ -49,6 +49,9 @@ export async function top(msg: Message, args: string): Promise<void> {
             if (user) {
                 list[i] = [`#${position}`, `${user.username}`, topTen[i].xp];
             }
+            else {
+                list[i] = [`#${position}`, `Deleted User`, topTen[i].xp]
+            }
         }
     }
 
